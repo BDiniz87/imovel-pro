@@ -45,7 +45,135 @@
     </header>
 
     <main>
+        <section class="hero">
 
+            <div class="hero-overlay"></div>
+
+            <div class="container hero-content">
+
+                <div class="hero-text">
+
+                    <h1>
+                        Encontre o imóvel<br>
+                        ideal para você
+                    </h1>
+
+                    <p>
+                        Casas, apartamentos e terrenos selecionados
+                        para você encontrar o lugar perfeito.
+                    </p>
+
+                </div>
+
+                <form class="search-box" id="search-form">
+
+                    <div class="search-purpose">
+
+                        <button
+                            type="button"
+                            class="purpose-button active"
+                            data-purpose="venda"
+                        >
+                            Comprar
+                        </button>
+
+                        <button
+                            type="button"
+                            class="purpose-button"
+                            data-purpose="aluguel"
+                        >
+                            Alugar
+                        </button>
+
+                    </div>
+
+                    <div class="search-fields">
+
+                        <div class="search-field">
+
+                            <label for="property-type">
+                                Tipo de Imóvel
+                            </label>
+
+                            <select id="property-type">
+                                <option value="">Todos</option>
+                                <option value="casa">Casa</option>
+                                <option value="apartamento">Apartamento</option>
+                                <option value="terreno">Terreno</option>
+                            </select>
+
+                        </div>
+
+                        <div class="search-field">
+
+                            <label for="city">
+                                Cidade
+                            </label>
+
+                            <select id="city">
+                                <option value="">Todas</option>
+                                <option value="botucatu">Botucatu</option>
+                                <option value="bauru">Bauru</option>
+                                <option value="sao-manuel">São Manuel</option>
+                            </select>
+
+                        </div>
+
+                        <div class="search-field">
+
+                            <label for="neighborhood">
+                                Bairro
+                            </label>
+
+                            <select id="neighborhood">
+                                <option value="">Todos</option>
+                                <option value="centro">Centro</option>
+                                <option value="vila-dos-lavradores">
+                                    Vila dos Lavradores
+                                </option>
+                                <option value="jardim-paraiso">
+                                    Jardim Paraíso
+                                </option>
+                            </select>
+
+                        </div>
+
+                         <div class="search-field">
+
+                            <label for="price">
+                                Faixa de preço
+                            </label>
+
+                            <select id="price">
+                                <option value="">Qualquer valor</option>
+                                <option value="300000">
+                                    Até R$ 300 mil
+                                </option>
+                                <option value="500000">
+                                    Até R$ 500 mil
+                                </option>
+                                <option value="1000000">
+                                    Até R$ 1 milhão
+                                </option>
+                            </select>
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="search-button"
+                        >
+                            Buscar
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+        
     </main>
 
     <script src="js/script.js"></script>

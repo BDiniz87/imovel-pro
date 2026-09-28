@@ -51,3 +51,75 @@ menuToggle.addEventListener("click", () => {
     );
 
 });
+
+const purposeButtons = document.querySelectorAll(".purpose-button");
+
+let selectedPurpose = "venda";
+
+purposeButtons.forEach((button) => {
+
+    button.addEventListener("click", () => {
+
+        purposeButtons.forEach((item) => {
+            item.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        selectedPurpose = button.dataset.purpose;
+
+
+        /*
+            Temporariamente vamos imprimir
+            no console para enxergar o estado
+            da aplicação mudando.
+        */
+
+        console.log(
+            "Finalidade selecionada:",
+            selectedPurpose
+        );
+
+    });
+
+});
+
+const searchForm = document.getElementById("search-form");
+
+
+searchForm.addEventListener("submit", (event) => {
+
+    event.preventDefault();
+
+    const propertyType = document.getElementById("property-type").value;
+
+    const city = document.getElementById("city").value;
+
+    const neighborhood = document.getElementById("neighborhood").value;
+
+    const price = document.getElementById("price").value;
+
+    const filters = {
+
+        purpose: selectedPurpose,
+
+        type: propertyType,
+
+        city: city,
+
+        neighborhood: neighborhood,
+
+        price: price
+
+    };
+
+    /*
+        Por enquanto apenas mostramos o objeto.
+
+        Na próxima etapa esse objeto será utilizado
+        para filtrar nosso array de imóveis.
+    */
+
+    console.log("Filtros selecionados:", filters);
+
+});
