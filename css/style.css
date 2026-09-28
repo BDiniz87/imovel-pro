@@ -1,4 +1,7 @@
 :root {
+
+    color-scheme: light;
+
     --color-primary: #0f2742;
     --color-primary-hover: #173b62;
 
@@ -18,6 +21,8 @@
 }
 
 [data-theme="dark"] {
+
+    color-scheme: dark;
 
     --color-background: #0d1117;
     --color-surface: #161b22;

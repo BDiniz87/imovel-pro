@@ -5,11 +5,21 @@ const nav = document.getElementById("nav");
 
 const savedTheme = localStorage.getItem("theme");
 
-if (savedTheme === "dark") {
+const systemPrefersDark = window.matchMedia(
+    "(prefers-color-scheme: dark)"
+).matches;
 
+if (savedTheme === "dark") {
     document.documentElement.setAttribute("data-theme", "dark");
     themeToggle.textContent = "☀️";
-    
+} else if (savedTheme === "light") {
+    document.documentElement.removeAttribute("data-theme");
+    themeToggle.textContent = "🌙";
+} else if (systemPrefersDark) {
+    document.documentElement.setAttribute("data-theme", "dark");
+    themeToggle.textContent = "☀️";
+} else {
+    themeToggle.textContent = "🌙";
 }
 
 themeToggle.addEventListener("click", () => {
