@@ -3,7 +3,17 @@ const themeToggle = document.getElementById("theme-toggle");
 const menuToggle = document.getElementById("menu-toggle");
 const nav = document.getElementById("nav");
 
+const priceInput = document.getElementById("price");
+const priceValue = document.getElementById("price-value");
+
+const citySelect = document.getElementById("city");
+const neighborhoodSelect = document.getElementById("neighborhood");
+
+const propertiesContainer = document.getElementById("featured-properties");
+
 const savedTheme = localStorage.getItem("theme");
+
+const favorites = [];
 
 const systemPrefersDark = window.matchMedia(
     "(prefers-color-scheme: dark)"
@@ -183,6 +193,70 @@ const properties = [
 
 ];
 
+const cities = [
+    ...new Set(
+        properties.map((property) => {
+            return property.city;
+        })
+    )
+];
+
+cities.forEach((city) => {
+    const option = document.createElement("option");
+    option.value = city;
+    option.textContent = city;
+    citySelect.appendChild(option);
+})
+
+console.log("Cidades: ", cities);
+
+function updateNeighborhoods(selectedCity) {
+    
+    let propertiesFromCity;
+
+    if(selectedCity === ""){
+        propertiesFromCity = properties;
+    } else {
+        propertiesFromCity = properties.filter((property) =>{
+            return property.city === selectedCity;
+        });
+    }
+
+    const neighborhoods = [
+        ...new Set(
+                propertiesFromCity.map((property) => {
+                    return property.neighborhood;
+                })
+        )
+    ];
+
+    neighborhoodSelect.innerHTML = `
+        <option value="">Todos</option>
+    `;
+
+    neighborhoods.forEach((neighborhood) => {
+
+        const option = document.createElement("option");
+
+        option.value = neighborhood;
+
+        option.textContent = neighborhood;
+
+        neighborhoodSelect.appendChild(option);
+
+    });
+
+    console.log("Bairros disponíveis: ", neighborhoods);
+
+}
+
+citySelect.addEventListener("change", () => {
+
+    const selectedCity = citySelect.value;
+
+    updateNeighborhoods(selectedCity);
+
+})
 
 themeToggle.addEventListener("click", () => {
 
@@ -230,6 +304,8 @@ purposeButtons.forEach((button) => {
 
         selectedPurpose = button.dataset.purpose;
 
+        updatePriceRange();
+
 
         /*
             Temporariamente vamos imprimir
@@ -259,7 +335,7 @@ searchForm.addEventListener("submit", (event) => {
 
     const neighborhood = document.getElementById("neighborhood").value;
 
-    const price = document.getElementById("price").value;
+    const price = Number(priceInput.value);
 
     const filters = {
 
@@ -275,14 +351,23 @@ searchForm.addEventListener("submit", (event) => {
 
     };
 
-    /*
-        Por enquanto apenas mostramos o objeto.
+    const filteredProperties = properties.filter((property) => {
 
-        Na próxima etapa esse objeto será utilizado
-        para filtrar nosso array de imóveis.
-    */
+       const matchesPurpose = property.purpose === filters.purpose;
+       const matchesType = filters.type === "" || property.type === filters.type;
+       const matchesCity = filters.city === "" || property.city === filters.city;
+       const matchesNeighborhood = filters.neighborhood === "" || property.neighborhood === filters.neighborhood;
+       const matchesPrice = property.price <= filters.price;
+
+       return matchesPurpose && matchesType && matchesCity && matchesNeighborhood && matchesPrice;
+
+    });
+
+    console.log("Resultados:", filteredProperties);
 
     console.log("Filtros selecionados:", filters);
+
+    renderProperties(filteredProperties);
 
 });
 
@@ -314,7 +399,20 @@ function renderProperties(propertyList) {
 
     container.innerHTML = "";
 
+    if (propertyList.length === 0) {
+
+        container.innerHTML = `
+            <p class="no-results">
+                Nenhum imóvel encontrado com os filtros selecionados.
+            </p>
+        `;
+
+        return;
+    }
+
     propertyList.forEach((property) => {
+
+        const isFavorited = favorites.includes(property.id);
 
         const card = document.createElement("article");
 
@@ -334,11 +432,11 @@ function renderProperties(propertyList) {
                 </span>
 
                 <button
-                    class="favorite-button"
+                    class="favorite-button ${isFavorited ? "favorited" : ""}"
                     data-property-id="${property.id}"
                     aria-label="Adicionar aos favoritos"
                 >
-                    ♡
+                    ${isFavorited ? "♥" : "♡"}
                 </button>
 
             </div>
@@ -403,30 +501,85 @@ const featuredProperties =
 
 renderProperties(featuredProperties);
 
-const favoriteButtons = document.querySelectorAll(".favorite-button");
+propertiesContainer.addEventListener("click", (event) => {
 
-favoriteButtons.forEach((button) => {
+    // Descobre se o usuário clicou em um botão de favorito.
+    const button = event.target.closest(".favorite-button");
 
-    button.addEventListener("click", () => {
+    // Se não clicou em um botão de favorito, encerra a função.
+    if (!button) {
+        return;
+    }
 
-        const propertyId = button.dataset.propertyId;
+    // O dataset retorna texto, então transformamos o ID em número.
+    const propertyId = Number(button.dataset.propertyId);
 
-        if (button.classList.contains("favorited")) {
 
-            button.classList.remove("favorited");
-            button.textContent = "♡";
+    // Verifica se esse imóvel já está no array de favoritos.
+    if (favorites.includes(propertyId)) {
 
-            console.log("Imóvel removido dos favoritos:", propertyId);
+        // Descobre a posição do ID dentro do array.
+        const index = favorites.indexOf(propertyId);
 
-        } else {
+        // Remove o ID do array.
+        favorites.splice(index, 1);
 
-            button.classList.add("favorited");
-            button.textContent = "♥";
+        // Atualiza o botão.
+        button.classList.remove("favorited");
+        button.textContent = "♡";
 
-            console.log("Imóvel adicionado aos favoritos:", propertyId);
-        }
+        console.log("Imóvel removido dos favoritos:", propertyId);
 
-    });
+    } else {
 
+        // Adiciona o ID ao array de favoritos.
+        favorites.push(propertyId);
+
+        // Atualiza o botão.
+        button.classList.add("favorited");
+        button.textContent = "♥";
+
+        console.log("Imóvel adicionado aos favoritos:", propertyId);
+    }
+
+    console.log("Favoritos:", favorites);
 });
 
+function formatFilterPrice(price) {
+    return new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency:"BRL",
+        maximumFractionDigits: 0
+    }).format(price);
+}
+
+priceInput.addEventListener("input", () => {
+
+    updatePriceDisplay();
+});
+
+function updatePriceRange() {
+    if (selectedPurpose === "venda") {
+        priceInput.min = 100000;
+        priceInput.max = 3000000;
+        priceInput.step = 50000;
+        priceInput.value= 3000000;
+    } else {
+        priceInput.min = 500;
+        priceInput.max = 10000;
+        priceInput.step = 250;
+        priceInput.value = 10000;
+    }
+
+    updatePriceDisplay();
+}
+
+function updatePriceDisplay() {
+    const currentPrice = Number(priceInput.value);
+
+    if (selectedPurpose === "aluguel") {
+        priceValue.textContent = `${formatFilterPrice(currentPrice)} / mês`;
+    } else {
+        priceValue.textContent = formatFilterPrice(currentPrice);
+    }
+}
