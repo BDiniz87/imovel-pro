@@ -556,6 +556,35 @@ button {
     font-size: 1rem;
 }
 
+.section-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.clear-filters {
+    padding: 10px 16px;
+
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+
+    background: transparent;
+    color: var(--color-text);
+
+    font: inherit;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: var(--transition);
+}
+
+.clear-filters:hover {
+    background: var(--color-surface);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
 @media (max-width: 1100px) {
 
     .properties-grid {
