@@ -11,9 +11,15 @@ const neighborhoodSelect = document.getElementById("neighborhood");
 
 const propertiesContainer = document.getElementById("featured-properties");
 
+const propertiesTitle = document.getElementById("properties-title");
+const propertiesDescription = document.getElementById("properties-description");
+
+const clearFiltersButton = document.getElementById("clear-filters");
+
 const savedTheme = localStorage.getItem("theme");
 
-const favorites = [];
+const savedFavorites = localStorage.getItem("favorites");
+const favorites = savedFavorites ? JSON.parse(savedFavorites) : [];
 
 const systemPrefersDark = window.matchMedia(
     "(prefers-color-scheme: dark)"
@@ -363,11 +369,63 @@ searchForm.addEventListener("submit", (event) => {
 
     });
 
-    console.log("Resultados:", filteredProperties);
+    updateResultsHeader(filteredProperties.length);
 
-    console.log("Filtros selecionados:", filters);
+    clearFiltersButton.hidden = false;
 
     renderProperties(filteredProperties);
+
+});
+
+function updateResultsHeader(resultCount) {
+
+    if (resultCount === 0) {
+        propertiesTitle.textContent =
+            "Nenhum imóvel encontrado";
+
+        propertiesDescription.textContent =
+            "Tente alterar os filtros da sua busca.";
+
+    } else if (resultCount === 1) {
+        propertiesTitle.textContent =
+            "1 imóvel encontrado";
+
+        propertiesDescription.textContent =
+            "Confira o imóvel que corresponde aos filtros selecionados.";
+
+    } else {
+        propertiesTitle.textContent =
+            `${resultCount} imóveis encontrados`;
+
+        propertiesDescription.textContent =
+            "Confira os imóveis que correspondem aos filtros selecionados.";
+    }
+}
+
+clearFiltersButton.addEventListener("click", () => {
+
+    selectedPurpose = "venda";
+
+    purposeButtons.forEach((button) => {
+        button.classList.remove("active");
+    });
+
+    const buyButton = document.querySelector('.purpose-button[data-purpose="venda"]');
+
+    buyButton.classList.add("active");
+
+    document.getElementById("property-type").value = "";
+    citySelect.value = "";
+
+    updateNeighborhoods("");
+    neighborhoodSelect.value = "";
+
+    updatePriceRange();
+
+    propertiesTitle.textContent = "Imóveis em destaque";
+    propertiesDescription.textContent = "Confira algumas das melhores oportunidades disponíveis.";
+    renderProperties(featuredProperties);
+    clearFiltersButton.hidden = true;
 
 });
 
@@ -503,44 +561,34 @@ renderProperties(featuredProperties);
 
 propertiesContainer.addEventListener("click", (event) => {
 
-    // Descobre se o usuário clicou em um botão de favorito.
     const button = event.target.closest(".favorite-button");
 
-    // Se não clicou em um botão de favorito, encerra a função.
     if (!button) {
         return;
     }
 
-    // O dataset retorna texto, então transformamos o ID em número.
     const propertyId = Number(button.dataset.propertyId);
 
-
-    // Verifica se esse imóvel já está no array de favoritos.
     if (favorites.includes(propertyId)) {
 
-        // Descobre a posição do ID dentro do array.
         const index = favorites.indexOf(propertyId);
 
-        // Remove o ID do array.
         favorites.splice(index, 1);
 
-        // Atualiza o botão.
         button.classList.remove("favorited");
         button.textContent = "♡";
 
         console.log("Imóvel removido dos favoritos:", propertyId);
-
     } else {
-
-        // Adiciona o ID ao array de favoritos.
         favorites.push(propertyId);
 
-        // Atualiza o botão.
         button.classList.add("favorited");
         button.textContent = "♥";
 
         console.log("Imóvel adicionado aos favoritos:", propertyId);
     }
+
+    localStorage.setItem("favorites",JSON.stringify(favorites));
 
     console.log("Favoritos:", favorites);
 });
