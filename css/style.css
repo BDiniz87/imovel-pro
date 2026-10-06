@@ -585,6 +585,41 @@ button {
     color: var(--color-primary);
 }
 
+.sort-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sort-container label {
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.sort-container select {
+    min-height: 40px;
+    padding: 0 12px;
+
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+
+    background-color: var(--color-background);
+    color: var(--color-text);
+
+    font: inherit;
+    cursor: pointer;
+    outline: none;
+}
+
+.sort-container select:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
 @media (max-width: 1100px) {
 
     .properties-grid {
@@ -713,6 +748,19 @@ button {
     .price-field,
     .search-button {
         grid-column: auto;
+    }
+
+    .section-actions {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .sort-container {
+        width: 100%;
+    }
+
+    .sort-container select {
+        flex: 1;
     }
 
 }

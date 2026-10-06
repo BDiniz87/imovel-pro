@@ -75,3 +75,17 @@ export function getPriceConfig(purpose) {
     }
 
 }
+
+export function sortProperties(properties, sortType) {
+
+    const sortedProperties = [...properties];
+
+    if (sortType === "price-asc") {
+        sortedProperties.sort((a,b) => a.price - b.price);
+    } else if (sortType === "price-desc") {
+        sortedProperties.sort((a,b) => b.price - a.price);
+    }
+
+    return sortedProperties;
+
+}

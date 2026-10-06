@@ -6,7 +6,8 @@ import {
     filterProperties, 
     getNeighborhoods, 
     getCities, 
-    getPriceConfig 
+    getPriceConfig,
+    sortProperties 
 } from "./modules/filters.js";
 import { formatPrice } from "./modules/formatters.js";
 import { createPropertyCard } from "./modules/propertyCard.js";
@@ -31,6 +32,8 @@ let selectedPurpose = "venda";
 
 const searchForm = document.getElementById("search-form");
 
+const sortSelect = document.getElementById("sort-properties");
+
 const cities = getCities(properties);
 
 const featuredProperties =
@@ -38,6 +41,8 @@ const featuredProperties =
         return property.featured;
     })
 ;
+
+let currentProperties = featuredProperties;
 
 cities.forEach((city) => {
     const option = document.createElement("option");
@@ -122,11 +127,23 @@ searchForm.addEventListener("submit", (event) => {
 
     const filteredProperties = filterProperties(properties,filters);
 
+    currentProperties = filteredProperties;
+
     updateResultsHeader(filteredProperties.length);
 
     clearFiltersButton.hidden = false;
 
     renderProperties(filteredProperties);
+
+});
+
+sortSelect.addEventListener("change", () => {
+
+    const sortType = sortSelect.value;
+
+    const sortedProperties = sortProperties(currentProperties, sortType);
+
+    renderProperties(sortedProperties);
 
 });
 
@@ -175,11 +192,14 @@ clearFiltersButton.addEventListener("click", () => {
 
     updatePriceRange();
 
+    sortSelect.value = "default";
+
     propertiesTitle.textContent = "Imóveis em destaque";
     propertiesDescription.textContent = "Confira algumas das melhores oportunidades disponíveis.";
+    currentProperties = featuredProperties;
     renderProperties(featuredProperties);
     clearFiltersButton.hidden = true;
-
+    
 });
 
 function renderProperties(propertyList) {
@@ -219,17 +239,9 @@ propertiesContainer.addEventListener("click", (event) => {
 
     const isFavorited = toggleFavorite(propertyId);
 
-    if (isFavorited) {
+    button.classList.toggle("favorited", isFavorited);
 
-        button.classList.add("favorited");
-        button.textContent = "♥";
-
-    } else {
-
-        button.classList.remove("favorited");
-        button.textContent = "♡";
-
-    }
+    button.textContent = isFavorited ? "♥" : "♡";
 
 });
 
