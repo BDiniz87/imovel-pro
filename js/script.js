@@ -11,6 +11,10 @@ import {
 } from "./modules/filters.js";
 import { formatPrice } from "./modules/formatters.js";
 import { createPropertyCard } from "./modules/propertyCard.js";
+import {
+     paginateProperties,
+     getTotalPages
+} from "./modules/pagination.js";
 
 const priceInput = document.getElementById("price");
 const priceValue = document.getElementById("price-value");
@@ -34,6 +38,11 @@ const searchForm = document.getElementById("search-form");
 
 const sortSelect = document.getElementById("sort-properties");
 
+const paginationPages = document.getElementById("pagination-pages");
+const previousPageButton = document.getElementById("previous-page");
+const nextPageButton = document.getElementById("next-page");
+const paginationContainer = document.getElementById("pagination");
+
 const cities = getCities(properties);
 
 const featuredProperties =
@@ -43,6 +52,9 @@ const featuredProperties =
 ;
 
 let currentProperties = featuredProperties;
+
+const propertiesPerPage = 4;
+let currentPage = 1;
 
 cities.forEach((city) => {
     const option = document.createElement("option");
@@ -133,17 +145,17 @@ searchForm.addEventListener("submit", (event) => {
 
     clearFiltersButton.hidden = false;
 
-    renderProperties(filteredProperties);
+    currentPage = 1;
+    renderCurrentPage();
+    renderPagination();
 
 });
 
 sortSelect.addEventListener("change", () => {
 
-    const sortType = sortSelect.value;
-
-    const sortedProperties = sortProperties(currentProperties, sortType);
-
-    renderProperties(sortedProperties);
+    currentPage = 1;
+    renderCurrentPage();
+    renderPagination();
 
 });
 
@@ -197,7 +209,10 @@ clearFiltersButton.addEventListener("click", () => {
     propertiesTitle.textContent = "Imóveis em destaque";
     propertiesDescription.textContent = "Confira algumas das melhores oportunidades disponíveis.";
     currentProperties = featuredProperties;
-    renderProperties(featuredProperties);
+    currentPage = 1;
+    renderCurrentPage();
+    renderPagination();
+    
     clearFiltersButton.hidden = true;
     
 });
@@ -225,6 +240,43 @@ function renderProperties(propertyList) {
 
         container.appendChild(card);
     });
+}
+
+function renderCurrentPage() {
+
+    const sortedProperties = sortProperties(currentProperties, sortSelect.value);
+
+    const paginatedProperties = paginateProperties(sortedProperties, currentPage, propertiesPerPage);
+
+    renderProperties(paginatedProperties);
+}
+
+function renderPagination() {
+
+    const totalPages = getTotalPages(currentProperties.length, propertiesPerPage);
+
+    paginationContainer.hidden = totalPages <= 1;
+    previousPageButton.disabled = currentPage <= 1; 
+    nextPageButton.disabled = currentPage >= totalPages;
+
+    paginationPages.innerHTML = "";
+
+    for (let page = 1; page <= totalPages; page++) {
+        const pageButton = document.createElement('button');
+
+        pageButton.textContent = page;
+        pageButton.classList.add("pagination-button");
+        if(page === currentPage) {
+            pageButton.classList.add('active');
+        }
+        pageButton.addEventListener("click", () => {
+            currentPage = page;
+            renderCurrentPage();
+            renderPagination();
+        });
+        paginationPages.appendChild(pageButton);
+    }
+
 }
 
 propertiesContainer.addEventListener("click", (event) => {
@@ -268,7 +320,34 @@ function updatePriceDisplay() {
     priceValue.textContent = formatPrice(currentPrice, selectedPurpose);
 }
 
+nextPageButton.addEventListener("click", () => {
+
+    const totalPages = getTotalPages(
+        currentProperties.length,
+        propertiesPerPage
+    );
+
+    if (currentPage < totalPages) {
+        currentPage++;
+        renderCurrentPage();
+        renderPagination();
+    }
+
+});
+
+
+previousPageButton.addEventListener("click", () => {
+
+    if (currentPage > 1) {
+        currentPage--;
+        renderCurrentPage();
+        renderPagination();
+    }
+
+});
+
 initTheme();
 initMenu();
 updateNeighborhoods("");
-renderProperties(featuredProperties);
+renderCurrentPage();
+renderPagination();
