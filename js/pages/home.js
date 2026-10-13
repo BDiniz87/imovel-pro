@@ -1,20 +1,20 @@
-import { properties } from "./data/properties.js";
-import { toggleFavorite} from "./modules/favorites.js";
-import { initTheme } from "./modules/theme.js";
-import { initMenu } from "./modules/menu.js";
+import { properties } from "../data/properties.js";
+import { toggleFavorite} from "../modules/favorites.js";
+import { initTheme } from "../modules/theme.js";
+import { initMenu } from "../modules/menu.js";
 import { 
     filterProperties, 
     getNeighborhoods, 
     getCities, 
     getPriceConfig,
     sortProperties 
-} from "./modules/filters.js";
-import { formatPrice } from "./modules/formatters.js";
-import { createPropertyCard } from "./modules/propertyCard.js";
+} from "../modules/filters.js";
+import { formatPrice } from "../modules/formatters.js";
+import { createPropertyCard } from "../modules/propertyCard.js";
 import {
      paginateProperties,
      getTotalPages
-} from "./modules/pagination.js";
+} from "../modules/pagination.js";
 
 const priceInput = document.getElementById("price");
 const priceValue = document.getElementById("price-value");

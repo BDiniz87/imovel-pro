@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imóveis à venda e para alugar | ImóvelPro</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                Imóvel <span>Pro</span>
+            </a>
+
+            <button
+                class="menu-toggle"
+                id="menu-toggle"
+                aria-label="Abrir menu"
+                aria-expanded="false"
+            >
+                ☰
+            </button>
+
+            <nav class="nav" id="nav">
+                <a href="index.html" class="nav-link">Início</a>
+                <a href="#" class="nav-link">Comprar</a>
+                <a href="#" class="nav-link">Alugar</a>
+                <a href="imoveis.html" class="nav-link active">Imóveis</a>
+                <a href="#" class="nav-link">Sobre</a>
+                <a href="#" class="nav-link">Contato</a>
+
+                <button
+                    class="theme-toggle"
+                    id="theme-toggle"
+                    aria-label="Alternar tema"
+                >
+                    🌙
+                </button>
+
+            </nav>
+
+        </div>
+
+    </header>   
+
+    <main>
+
+        <section class="listings-intro">
+
+            <div class="container">
+
+                <h1>Todos os imóveis</h1>
+
+                <p>Confira nossa seleção de imóveis</p>
+
+            </div>
+
+        </section>
+
+        <section class="listings-section">
+
+            <div class="container">
+
+                <div class="listings-layout">
+
+                    <aside class="listings-filters">
+                        <h2>Filtrar imóveis</h2>
+                    </aside>
+
+                    <div class="listings-results">
+                        <h2>Imóveis disponíveis</h2>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script type="module" src="js/pages/listings.js"></script>
+</body>
+</html>
