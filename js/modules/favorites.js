@@ -29,3 +29,25 @@ export function isFavorite(propertyId) {
 
     return favorites.includes(propertyId);
 }
+
+export function initFavoriteButtons(container) {
+
+    container.addEventListener("click", (event) => {
+    
+        const button = event.target.closest(".favorite-button");
+    
+        if (!button) {
+            return;
+        }
+    
+        const propertyId = Number(button.dataset.propertyId);
+    
+        const isFavorited = toggleFavorite(propertyId);
+    
+        button.classList.toggle("favorited", isFavorited);
+    
+        button.textContent = isFavorited ? "♥" : "♡";
+    
+    });
+
+}

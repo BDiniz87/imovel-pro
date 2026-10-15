@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imóveis à venda e para alugar | ImóvelPro</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pages/listings.css">
 </head>
 <body>
 
@@ -66,11 +67,64 @@
                 <div class="listings-layout">
 
                     <aside class="listings-filters">
+
                         <h2>Filtrar imóveis</h2>
+
+                        <form id="listings-filter-form">
+
+                            <div class="search-field">
+                                <label for="listing-purpose">Finalidade</label>
+
+                                <select id="listing-purpose" name="purpose">
+                                    <option value="">Todas</option>
+                                    <option value="venda">Comprar</option>
+                                    <option value="aluguel">Alugar</option>
+                                </select>
+                            </div>
+
+                            <div class="search-field">
+                                <label for="listing-type">Tipo de imóvel</label>
+
+                                <select id="listing-type" name="type">
+                                    <option value="">Todos os tipos</option>
+                                    <option value="casa">Casa</option>
+                                    <option value="apartamento">Apartamento</option>
+                                    <option value="terreno">Terreno</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="search-button">
+                                Buscar imóveis
+                            </button>
+
+                        </form>
+
                     </aside>
 
                     <div class="listings-results">
                         <h2>Imóveis disponíveis</h2>
+                        <div class="properties-grid" id="listings-grid"></div>
+                        <div class="pagination" id="pagination" hidden>
+                            <button
+                                type="button"
+                                class="pagination-button"
+                                id="previous-page"
+                                aria-label="Página anterior"
+                            >
+                                Anterior
+                            </button>
+
+                            <div class="pagination-pages" id="pagination-pages"></div>
+
+                            <button
+                                type="button"
+                                class="pagination-button"
+                                id="next-page"
+                                aria-label="Próxima página"
+                            >
+                                Próxima
+                            </button>
+                        </div>
                     </div>
 
                 </div>

@@ -1,5 +1,5 @@
 import { properties } from "../data/properties.js";
-import { toggleFavorite} from "../modules/favorites.js";
+import { initFavoriteButtons} from "../modules/favorites.js";
 import { initTheme } from "../modules/theme.js";
 import { initMenu } from "../modules/menu.js";
 import { 
@@ -13,7 +13,8 @@ import { formatPrice } from "../modules/formatters.js";
 import { createPropertyCard } from "../modules/propertyCard.js";
 import {
      paginateProperties,
-     getTotalPages
+     getTotalPages,
+     renderPagination as renderPaginationButtons
 } from "../modules/pagination.js";
 
 const priceInput = document.getElementById("price");
@@ -251,51 +252,26 @@ function renderCurrentPage() {
     renderProperties(paginatedProperties);
 }
 
+function handlePageChange(page) {
+    currentPage = page;
+    renderCurrentPage();
+    renderPagination();
+}
+
 function renderPagination() {
 
     const totalPages = getTotalPages(currentProperties.length, propertiesPerPage);
 
-    paginationContainer.hidden = totalPages <= 1;
-    previousPageButton.disabled = currentPage <= 1; 
-    nextPageButton.disabled = currentPage >= totalPages;
-
-    paginationPages.innerHTML = "";
-
-    for (let page = 1; page <= totalPages; page++) {
-        const pageButton = document.createElement('button');
-
-        pageButton.textContent = page;
-        pageButton.classList.add("pagination-button");
-        if(page === currentPage) {
-            pageButton.classList.add('active');
-        }
-        pageButton.addEventListener("click", () => {
-            currentPage = page;
-            renderCurrentPage();
-            renderPagination();
-        });
-        paginationPages.appendChild(pageButton);
-    }
-
+    renderPaginationButtons(
+        paginationContainer,
+        paginationPages,
+        previousPageButton,
+        nextPageButton,
+        currentPage,
+        totalPages,
+        handlePageChange
+    );
 }
-
-propertiesContainer.addEventListener("click", (event) => {
-
-    const button = event.target.closest(".favorite-button");
-
-    if (!button) {
-        return;
-    }
-
-    const propertyId = Number(button.dataset.propertyId);
-
-    const isFavorited = toggleFavorite(propertyId);
-
-    button.classList.toggle("favorited", isFavorited);
-
-    button.textContent = isFavorited ? "♥" : "♡";
-
-});
 
 priceInput.addEventListener("input", () => {
 
@@ -328,9 +304,7 @@ nextPageButton.addEventListener("click", () => {
     );
 
     if (currentPage < totalPages) {
-        currentPage++;
-        renderCurrentPage();
-        renderPagination();
+        handlePageChange(currentPage + 1);
     }
 
 });
@@ -339,9 +313,7 @@ nextPageButton.addEventListener("click", () => {
 previousPageButton.addEventListener("click", () => {
 
     if (currentPage > 1) {
-        currentPage--;
-        renderCurrentPage();
-        renderPagination();
+        handlePageChange(currentPage - 1);
     }
 
 });
@@ -351,3 +323,4 @@ initMenu();
 updateNeighborhoods("");
 renderCurrentPage();
 renderPagination();
+initFavoriteButtons(propertiesContainer);

@@ -2,7 +2,7 @@ export function filterProperties(properties, filters) {
 
     return properties.filter((property) => {
 
-        const matchesPurpose = property.purpose === filters.purpose;
+        const matchesPurpose = filters.purpose === "" || property.purpose === filters.purpose;
         const matchesType = filters.type === "" || property.type === filters.type;
         const matchesCity = filters.city === "" || property.city === filters.city;
         const matchesNeighborhood =

@@ -1,0 +1,59 @@
+/* Apresentação do catálogo */
+
+.listings-intro {
+    padding: 48px 0;
+    background-color: var(--color-surface);
+}
+
+.listings-intro h1 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.listings-intro p {
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+}
+
+/* Conteúdo do catálogo */
+
+.listings-section {
+    padding: 48px 0;
+}
+
+/* Filtros do catálogo */
+
+.listings-filters {
+    padding: 24px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    align-self: start;
+}
+
+.listings-filters h2 {
+    font-size: 1.2rem;
+    margin-bottom: 24px;
+}
+
+#listings-filter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.listings-filters .search-button {
+    width: 100%;
+}
+
+.listings-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 32px;
+}
+
+@media (max-width: 768px) {
+    .listings-layout {
+        grid-template-columns: 1fr;
+    }
+}
