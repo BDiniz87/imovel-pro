@@ -52,6 +52,48 @@
     gap: 32px;
 }
 
+/* Botão limpar filtros */
+
+#clear-listings-filters {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: transparent;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+#clear-listings-filters:hover {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+}
+
+#clear-listings-filters:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+.listings-sort {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.listings-sort select {
+    padding: 8px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+}
+
 @media (max-width: 768px) {
     .listings-layout {
         grid-template-columns: 1fr;

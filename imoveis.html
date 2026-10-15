@@ -76,7 +76,6 @@
                                 <label for="listing-purpose">Finalidade</label>
 
                                 <select id="listing-purpose" name="purpose">
-                                    <option value="">Todas</option>
                                     <option value="venda">Comprar</option>
                                     <option value="aluguel">Alugar</option>
                                 </select>
@@ -93,8 +92,42 @@
                                 </select>
                             </div>
 
+                            <div class="search-field">
+                                <label for="listing-city">Cidade</label>
+                                <select id="listing-city" name="city">
+                                    <option value="">Todas as cidades</option>
+                                </select>
+                            </div>
+
+                            <div class="search-field">
+                                <label for="listing-neighborhood">Bairro</label>
+                                <select id="listing-neighborhood" name="neighborhood">
+                                    <option value="">Todos os bairros</option>
+                                </select>
+                            </div>
+
+                            <div class="search-field">
+                                <label for="listing-price">Preço máximo</label>
+
+                                <input
+                                    type="range"
+                                    id="listing-price"
+                                    name="price"
+                                    min="100000"
+                                    max="3000000"
+                                    step="50000"
+                                    value="3000000"
+                                >
+
+                                <output id="listing-price-value" for="listing-price"></output>
+                            </div>
+
                             <button type="submit" class="search-button">
                                 Buscar imóveis
+                            </button>
+
+                            <button type="button" id="clear-listings-filters" class="clear-filters-button">
+                                Limpar filtros
                             </button>
 
                         </form>
@@ -103,7 +136,18 @@
 
                     <div class="listings-results">
                         <h2>Imóveis disponíveis</h2>
+                        <div class="listings-sort">
+                            <label for="listing-sort">Ordenar por:</label>
+
+                            <select id="listing-sort">
+                                <option value="default">Mais recentes</option>
+                                <option value="price-asc">Menor preço</option>
+                                <option value="price-desc">Maior preço</option>
+                            </select>
+                        </div>
+
                         <div class="properties-grid" id="listings-grid"></div>
+                        
                         <div class="pagination" id="pagination" hidden>
                             <button
                                 type="button"
