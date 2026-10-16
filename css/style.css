@@ -125,6 +125,44 @@ button {
     display: none;
 }
 
+/* Link de favoritos no cabeçalho */
+
+.favorites-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: var(--color-text);
+    text-decoration: none;
+    min-width: 44px;
+    min-height: 44px;
+}
+
+.favorites-icon {
+    font-size: 26px;
+    line-height: 1;
+}
+
+.favorites-text {
+    display: none;
+}
+
+.favorites-count {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.favorites-link:hover {
+    color: var(--color-primary);
+}
+
+.favorites-link:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+
 /* ==========================================================
    05. HERO DA PÁGINA INICIAL
    ========================================================== */
@@ -601,6 +639,21 @@ button {
 
     .nav.open {
         display: flex;
+    }
+
+    .favorites-text {
+        display: inline;
+    }
+
+    .favorites-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: var(--color-text);
+        text-decoration: none;
+        min-width: 44px;
+        min-height: 44px;
     }
 
     .hero {

@@ -1,5 +1,8 @@
 import { properties } from "../data/properties.js";
-import { initFavoriteButtons} from "../modules/favorites.js";
+import { 
+    initFavoriteButtons,
+    updateFavoritesCount
+} from "../modules/favorites.js";
 import { initTheme } from "../modules/theme.js";
 import { initMenu } from "../modules/menu.js";
 import { 
@@ -324,3 +327,4 @@ updateNeighborhoods("");
 renderCurrentPage();
 renderPagination();
 initFavoriteButtons(propertiesContainer);
+updateFavoritesCount();

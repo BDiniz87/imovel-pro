@@ -2,7 +2,10 @@ import { initTheme } from "../modules/theme.js";
 import { initMenu } from "../modules/menu.js";
 import { properties } from "../data/properties.js";
 import { createPropertyCard } from "../modules/propertyCard.js";
-import { initFavoriteButtons } from "../modules/favorites.js";
+import { 
+    initFavoriteButtons,
+    updateFavoritesCount
+ } from "../modules/favorites.js";
 import {
     paginateProperties,
     getTotalPages,
@@ -229,3 +232,4 @@ updatePriceRange();
 renderListings();
 updatePagination();
 initFavoriteButtons(listingsGrid);
+updateFavoritesCount();

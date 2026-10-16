@@ -30,7 +30,33 @@ export function isFavorite(propertyId) {
     return favorites.includes(propertyId);
 }
 
-export function initFavoriteButtons(container) {
+export function getFavoritesCount() {
+    return favorites.length;
+}
+
+export function updateFavoritesCount() {
+
+    const favoritesCountElement = document.querySelector('#favorites-count');
+
+    if (!favoritesCountElement) {
+        return;
+    }
+
+    const favoritesCount = getFavoritesCount();
+
+    favoritesCountElement.textContent = favoritesCount;
+
+    const favoritesIcon = document.querySelector(".favorites-icon");
+
+    const hasFavorites = favoritesCount > 0;
+
+    favoritesIcon.textContent = hasFavorites ? "♥" : "♡";
+
+    favoritesIcon.classList.toggle("favorited", hasFavorites);
+
+}
+
+export function initFavoriteButtons(container, onFavoriteChange) {
 
     container.addEventListener("click", (event) => {
     
@@ -47,6 +73,12 @@ export function initFavoriteButtons(container) {
         button.classList.toggle("favorited", isFavorited);
     
         button.textContent = isFavorited ? "♥" : "♡";
+
+        updateFavoritesCount();
+
+        if (typeof onFavoriteChange === "function") {
+            onFavoriteChange();
+        }
     
     });
 
