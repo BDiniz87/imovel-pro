@@ -240,7 +240,7 @@ function renderProperties(propertyList) {
 
     propertyList.forEach((property) => {
 
-        const card = createPropertyCard(property);
+        const card = createPropertyCard(property, "inicio");
 
         container.appendChild(card);
     });

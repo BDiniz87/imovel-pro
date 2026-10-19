@@ -1,7 +1,7 @@
 import { isFavorite } from "./favorites.js";
 import { formatPrice } from "./formatters.js";
 
-export function createPropertyCard(property) {
+export function createPropertyCard(property, origin) {
 
     const isFavorited = isFavorite(property.id);
 
@@ -36,7 +36,9 @@ export function createPropertyCard(property) {
         <div class="property-content">
 
             <h3>
-                ${property.title}
+                <a href="imovel.html?id=${property.id}&origem=${origin}">
+                    ${property.title}
+                </a>
             </h3>
 
             <p class="property-location">

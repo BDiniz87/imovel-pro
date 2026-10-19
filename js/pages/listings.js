@@ -121,7 +121,7 @@ function renderListings() {
     }
 
     const paginatedProperties = paginateProperties(currentProperties, currentPage, propertiesPerPage);
-    const cards = paginatedProperties.map(property => createPropertyCard(property));
+    const cards = paginatedProperties.map(property => createPropertyCard(property,initialPurpose));
 
     listingsGrid.replaceChildren(...cards);
 

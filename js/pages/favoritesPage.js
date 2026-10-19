@@ -36,7 +36,7 @@ function renderFavorites() {
 
     favoriteProperties.forEach((property) => {
 
-        const card = createPropertyCard(property);
+        const card = createPropertyCard(property, "favoritos");
 
         favoritesGrid.appendChild(card);
     });
