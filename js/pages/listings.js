@@ -27,7 +27,6 @@ const previousPageButton = document.querySelector("#previous-page");
 const nextPageButton = document.querySelector("#next-page");
 
 const listingsFilterForm = document.querySelector("#listings-filter-form");
-const purposeSelect = document.querySelector("#listing-purpose");
 const typeSelect = document.querySelector("#listing-type");
 const citySelect = document.querySelector("#listing-city");
 const neighborhoodSelect = document.querySelector("#listing-neighborhood");
@@ -39,10 +38,35 @@ const clearFiltersButton = document.querySelector("#clear-listings-filters");
 
 const sortSelect = document.querySelector("#listing-sort");
 
+const buyLink = document.querySelector("#nav-buy");
+const rentLink = document.querySelector("#nav-rent");
+
 const cities = getCities(properties);
 
+const listingsTitle = document.querySelector("#listings-title");
+
+const urlParams = new URLSearchParams(window.location.search);
+
+const finalidade = urlParams.get("finalidade");
+
+const initialPurpose = finalidade === "aluguel" ? "aluguel" : "venda";
+
+listingsTitle.textContent = initialPurpose === "aluguel" ? "Imóveis para alugar" : "Imóveis à venda";
+
+buyLink.classList.toggle("active", initialPurpose === "venda");
+
+rentLink.classList.toggle("active", initialPurpose === "aluguel");
+
+if (initialPurpose === "venda") {
+    buyLink.setAttribute("aria-current", "page");
+} else {
+    rentLink.setAttribute("aria-current", "page");
+}
+
+document.title = `${listingsTitle.textContent} | ImóvelPro`;
+
 const defaultProperties = properties.filter(
-    property => property.purpose === "venda"
+    property => property.purpose === initialPurpose
 );
 
 const propertiesPerPage = 4;
@@ -107,12 +131,12 @@ function updatePriceDisplay() {
 
     const currentPrice = Number(priceInput.value);
 
-    priceValue.textContent = formatPrice(currentPrice, purposeSelect.value);
+    priceValue.textContent = formatPrice(currentPrice, initialPurpose);
 }
 
 function updatePriceRange() {
 
-    const priceConfig = getPriceConfig(purposeSelect.value);
+    const priceConfig = getPriceConfig(initialPurpose);
 
     priceInput.min = priceConfig.min;
     priceInput.max = priceConfig.max;
@@ -124,10 +148,6 @@ function updatePriceRange() {
 
 priceInput.addEventListener("input", () => {
     updatePriceDisplay();
-});
-
-purposeSelect.addEventListener("change", () => {
-    updatePriceRange();
 });
 
 function handlePageChange(page) {
@@ -181,7 +201,7 @@ listingsFilterForm.addEventListener("submit", (event) => {
 
     const filters = {
 
-        purpose: purposeSelect.value,
+        purpose: initialPurpose,
 
         type: typeSelect.value,
 

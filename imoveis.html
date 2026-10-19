@@ -26,9 +26,8 @@
 
             <nav class="nav" id="nav">
                 <a href="index.html" class="nav-link">Início</a>
-                <a href="#" class="nav-link">Comprar</a>
-                <a href="#" class="nav-link">Alugar</a>
-                <a href="imoveis.html" class="nav-link active">Imóveis</a>
+                <a href="imoveis.html?finalidade=venda" id="nav-buy" class="nav-link">Comprar</a>
+                <a href="imoveis.html?finalidade=aluguel" id="nav-rent" class="nav-link">Alugar</a>
                 <a href="#" class="nav-link">Sobre</a>
                 <a href="#" class="nav-link">Contato</a>
                 <a
@@ -62,7 +61,7 @@
 
             <div class="container">
 
-                <h1>Todos os imóveis</h1>
+                <h1 id="listings-title" class="listings-title">Todos os imóveis</h1>
 
                 <p>Confira nossa seleção de imóveis</p>
 
@@ -81,15 +80,6 @@
                         <h2>Filtrar imóveis</h2>
 
                         <form id="listings-filter-form">
-
-                            <div class="search-field">
-                                <label for="listing-purpose">Finalidade</label>
-
-                                <select id="listing-purpose" name="purpose">
-                                    <option value="venda">Comprar</option>
-                                    <option value="aluguel">Alugar</option>
-                                </select>
-                            </div>
 
                             <div class="search-field">
                                 <label for="listing-type">Tipo de imóvel</label>
