@@ -34,4 +34,22 @@ export function initTheme() {
 
     });
 
+    window.addEventListener("pageshow", (event) => {
+        if (event.persisted) {
+            const savedTheme = localStorage.getItem("theme");
+            const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+            const isDark = savedTheme === "dark" ||
+                (savedTheme === null && systemPrefersDark);
+
+            if (isDark) {
+                document.documentElement.setAttribute("data-theme", "dark");
+            } else {
+                document.documentElement.removeAttribute("data-theme");
+            }
+
+            themeToggle.textContent = isDark ? "☀️" : "🌙";
+        }
+    });
+
 }
