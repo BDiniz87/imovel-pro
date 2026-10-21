@@ -1,52 +1,22 @@
+
+/* =========================================
+   PÁGINA DE DETALHES DO IMÓVEL
+========================================= */
+
+/* Espaçamento geral da página */
 .property-details {
     padding-top: 40px;
     padding-bottom: 60px;
 }
 
-.property-details-title {
-    font-size: 2rem;
-    color: var(--color-text);
-    margin-bottom: 12px;
+/* Limita a largura do conteúdo em telas grandes */
+.property-details > * {
+    max-width: 100%;
 }
 
-.property-details-location {
-    color: var(--color-text-secondary);
-    margin-bottom: 24px;
-}
-
-.property-details-back {
-    color: var(--color-text);
-    font-weight: 500;
-    text-decoration: none;
-    transition: color var(--transition);
-}
-
-.property-details-back:hover {
-    color: var(--color-text-secondary);
-    text-decoration: underline;
-}
-
-.property-not-found {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-}
-
-.property-details-image {
-    display: block;
-    width: 100%;
-    max-height: 500px;
-    object-fit: cover;
-    border-radius: 12px;
-}
-
-.property-details-price {
-    margin-top: 24px;
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: var(--color-text);
-}
+/* =========================================
+   LINK DE RETORNO
+========================================= */
 
 .property-details-back {
     display: inline-flex;
@@ -63,18 +33,337 @@
     transition: color 0.2s ease;
 }
 
+/* Adiciona uma seta antes do texto */
 .property-details-back::before {
     content: "←";
     font-size: 1.2rem;
 }
 
+/* Destaque ao passar o mouse */
 .property-details-back:hover {
     color: var(--color-primary);
-    text-decoration: none;
 }
 
+/* Indicação visual para navegação por teclado */
 .property-details-back:focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 4px;
     border-radius: 4px;
 }
+
+/* =========================================
+   TÍTULO E LOCALIZAÇÃO
+========================================= */
+
+.property-details-title {
+    margin-bottom: 12px;
+
+    color: var(--color-text);
+    font-size: 2rem;
+}
+
+.property-details-location {
+    margin-bottom: 24px;
+    color: var(--color-text-secondary);
+}
+
+/* =========================================
+   FOTOGRAFIA PRINCIPAL
+========================================= */
+
+/*
+   A imagem não precisa ocupar toda a largura
+   disponível em monitores grandes.
+
+   width: 100% permite diminuir em telas menores.
+   max-width limita seu tamanho máximo.
+   height: auto preserva a proporção original.
+*/
+
+.property-details-image {
+    display: block;
+
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+
+    margin-inline: auto;
+
+    border-radius: 12px;
+}
+
+/* =========================================
+   PREÇO
+========================================= */
+
+.property-details-price {
+    width: 100%;
+    max-width: 900px;
+    margin: 24px auto 0;
+
+    color: var(--color-text);
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+/* =========================================
+   CARACTERÍSTICAS DO IMÓVEL
+========================================= */
+
+/*
+   Organiza quartos, banheiros e vagas
+   em três colunas de larguras iguais.
+*/
+
+.property-details-features {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+
+    width: 100%;
+    max-width: 900px;
+
+    margin: 24px auto 0;
+}
+
+/* Aparência de cada característica */
+.property-feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 24px 16px;
+
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+
+    color: var(--color-text);
+    text-align: center;
+}
+
+/* Ícone da característica */
+.property-feature-icon {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+/* Número de quartos, banheiros ou vagas */
+.property-feature strong {
+    font-size: 1.5rem;
+}
+
+/* Legenda abaixo do número */
+.property-feature > span:last-child {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
+/* =========================================
+   IMÓVEL NÃO ENCONTRADO
+========================================= */
+
+.property-not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+/* Tablets e telas intermediárias */
+@media (max-width: 768px) {
+    .property-details {
+        padding-top: 24px;
+        padding-bottom: 40px;
+    }
+
+    .property-details-title {
+        font-size: 1.75rem;
+    }
+
+    .property-details-features {
+        gap: 12px;
+    }
+
+    .property-feature {
+        padding: 20px 12px;
+    }
+}
+
+/* Celulares */
+@media (max-width: 600px) {
+    .property-details-title {
+        font-size: 1.5rem;
+    }
+
+    .property-details-image {
+        border-radius: 8px;
+    }
+
+    /*
+       Mantém três características lado a lado,
+       mas com dimensões compactas.
+    */
+    .property-details-features {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .property-feature {
+        gap: 6px;
+        padding: 16px 6px;
+        border-radius: 8px;
+    }
+
+    .property-feature-icon {
+        font-size: 1.5rem;
+    }
+
+    .property-feature strong {
+        font-size: 1.25rem;
+    }
+
+    .property-feature > span:last-child {
+        font-size: 0.75rem;
+    }
+
+    .property-details-price {
+        font-size: 1.5rem;
+    }
+}
+
+/* Celulares muito estreitos */
+@media (max-width: 360px) {
+    .property-details-features {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================
+   GALERIA DE FOTOGRAFIAS
+========================================= */
+
+.property-gallery {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 100px;
+    gap: 12px;
+
+    width: 100%;
+    max-width: 900px;
+    margin-inline: auto;
+    align-items: start;
+}
+
+/* Mantém a área da fotografia principal estável */
+.property-gallery .property-details-image {
+    display: block;
+    width: 100%;
+    max-width: none;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+    background-color: var(--color-surface);
+    border-radius: 12px;
+}
+
+/*
+   Miniaturas organizadas verticalmente.
+*/
+.property-gallery-thumbnails {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+/*
+   Cada miniatura é um botão clicável.
+*/
+.property-gallery-thumbnail {
+    display: block;
+    width: 100%;
+    padding: 0;
+
+    overflow: hidden;
+    cursor: pointer;
+
+    background: transparent;
+    border: 2px solid transparent;
+    border-radius: 8px;
+
+    transition: border-color 0.2s ease;
+}
+
+/* Destaca a miniatura da fotografia selecionada */
+.property-gallery-thumbnail.is-active {
+    border-color: var(--color-selected);
+}
+
+/*
+   A imagem ocupa todo o botão.
+
+   object-fit: cover preserva a proporção,
+   mas pode cortar as bordas da miniatura.
+*/
+.property-gallery-thumbnail img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+/* Destaque ao passar o mouse */
+.property-gallery-thumbnail:hover {
+    border-color: var(--color-selected);
+}
+
+/* Destaque para navegação por teclado */
+.property-gallery-thumbnail:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+/* =========================================
+   GALERIA EM CELULARES
+========================================= */
+
+@media (max-width: 600px) {
+
+    /*
+       A galeria passa a ter uma coluna.
+       As miniaturas ficam abaixo da foto.
+    */
+    .property-gallery {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+    }
+
+    /*
+       Miniaturas em uma fileira horizontal.
+    */
+    .property-gallery-thumbnails {
+        flex-direction: row;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+    }
+
+    /*
+       Cada miniatura mantém uma largura
+       fixa, sem encolher.
+    */
+    .property-gallery-thumbnail {
+        flex: 0 0 72px;
+    }
+
+    .property-gallery .property-details-image {
+        border-radius: 8px;
+    }
+}
+

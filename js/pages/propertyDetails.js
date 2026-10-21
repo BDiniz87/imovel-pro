@@ -41,6 +41,8 @@ if (!property) {
 
     const backText = returnText[origin] || "Voltar para os imóveis";
 
+    const propertyImages = property.images ?? [property.image];
+
     propertyDetails.innerHTML = `
         <a href="${returnUrl}" class="property-details-back">
              ${backText}
@@ -54,17 +56,100 @@ if (!property) {
             ${property.neighborhood}, ${property.city}
         </p>
 
-        <img
-            class="property-details-image"
-            src="${property.image}"
-            alt="${property.title}"
-        >
+        <div class="property-gallery">
+            <img
+                class="property-details-image"
+                src="${propertyImages[0]}"
+                alt="${property.title}"
+            >
+
+            <div class="property-gallery-thumbnails">
+                ${propertyImages.map((image, index) => `
+                    <button
+                        type="button"
+                        class="property-gallery-thumbnail"
+                        aria-label="Visualizar foto ${index + 1} do imóvel"
+                    >
+                        <img
+                            src="${image}"
+                            alt=""
+                            loading="lazy"
+                        >
+                    </button>
+                `).join("")}
+            </div>
+        </div>
 
         <p class="property-details-price">
             ${formatPrice(property.price, property.purpose)}
         </p>
 
+        <div class="property-details-features">
+
+            ${
+                property.bedrooms > 0
+                    ? `
+                        <div class="property-feature">
+                            <span class="property-feature-icon">🛏️</span>
+                            <strong>${property.bedrooms}</strong>
+                            <span>Quartos</span>
+                        </div>
+                    `
+                    : ""
+            }
+
+            ${
+                property.bathrooms > 0
+                    ? `
+                        <div class="property-feature">
+                            <span class="property-feature-icon">🚿</span>
+                            <strong>${property.bathrooms}</strong>
+                            <span>Banheiros</span>
+                        </div>
+                    `
+                    : ""
+            }
+
+            ${
+                property.parkingSpaces > 0
+                    ? `
+                        <div class="property-feature">
+                            <span class="property-feature-icon">🚗</span>
+                            <strong>${property.parkingSpaces}</strong>
+                            <span>Vagas</span>
+                        </div>
+                    `
+                    : ""
+            }
+
+        </div>
+
     `;
+
+    const mainImage = document.querySelector(".property-details-image");
+
+    const thumbnails = document.querySelectorAll(".property-gallery-thumbnail");
+
+    thumbnails.forEach((thumbnail, index) => {
+
+        const isSelected = index === 0;
+
+        thumbnail.classList.toggle("is-active", isSelected);
+        thumbnail.setAttribute("aria-pressed", String(isSelected));
+
+        thumbnail.addEventListener("click", () => {
+
+            mainImage.src = propertyImages[index];
+
+            thumbnails.forEach((button, buttonIndex) => {
+                const isActive = buttonIndex === index;
+
+                button.classList.toggle("is-active", isActive);
+                button.setAttribute("aria-pressed", String(isActive));
+            });
+
+        });
+    });
 }
 
 

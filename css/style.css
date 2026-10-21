@@ -10,6 +10,7 @@
     --color-text: #172033;
     --color-text-secondary: #667085;
     --color-border: #e4e7ec;
+    --color-selected: #2563eb;
     --container-width: 1200px;
     --border-radius: 10px;
     --transition: 0.25s ease;
@@ -22,6 +23,7 @@
     --color-text: #f0f6fc;
     --color-text-secondary: #9da7b3;
     --color-border: #30363d;
+    --color-selected: #60a5fa;
 }
 
 /* ==========================================================
