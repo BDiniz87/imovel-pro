@@ -85,16 +85,37 @@ if (!property) {
                 ${property.title}
             </h1>
 
-            <button
-                type="button"
-                class="favorite-button ${isFavorite(property.id) ? "favorited" : ""}"
-                data-property-id="${property.id}"
-                aria-label="Favoritar ${property.title}"
-                aria-pressed="${isFavorite(property.id)}"
-            >
-                ${isFavorite(property.id) ? "♥" : "♡"}
-            </button>
+            <div class="property-details-actions">
+
+                <button
+                    type="button"
+                    class="favorite-button ${isFavorite(property.id) ? "favorited" : ""}"
+                    data-property-id="${property.id}"
+                    aria-label="Favoritar ${property.title}"
+                    aria-pressed="${isFavorite(property.id)}"
+                >
+                    ${isFavorite(property.id) ? "♥" : "♡"}
+                </button>
+
+                 <button
+                    type="button"
+                    class="property-share-button"
+                    aria-label="Compartilhar imóvel"
+                    title="Compartilhar imóvel"
+                >
+                    <img src="assets/icons/share.svg" alt="" aria-hidden="true">
+                </button>
+                
+            </div>
+
         </div>
+
+        <p
+            id="share-feedback"
+            class="share-feedback"
+            role="status"
+            aria-live="polite"
+        ></p>
 
         <p class="property-details-location">
             ${property.neighborhood}, ${property.city}
@@ -177,9 +198,10 @@ if (!property) {
                             class="property-whatsapp-button"
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label="Tenho interesse neste imóvel. Entrar em contato pelo WhatsApp"
                         >
                             <img src="assets/icons/whatsapp.svg" alt="" aria-hidden="true">
-                            Tenho interesse — WhatsApp
+                            Tenho interesse
                         </a>
                     `
                     : `
@@ -187,9 +209,10 @@ if (!property) {
                             type="button"
                             class="property-whatsapp-button"
                             id="whatsapp-demo-button"
+                            aria-label="Tenho interesse neste imóvel. Ver informações sobre o contato na versão demonstrativa"
                         >
                             <img src="assets/icons/whatsapp.svg" alt="" aria-hidden="true">
-                            Tenho interesse — WhatsApp
+                            Tenho interesse
                         </button>
                     `
             }
@@ -213,6 +236,45 @@ if (!property) {
     `;
 
     initFavoriteButtons(propertyDetails);
+
+    const shareButton = document.querySelector(".property-share-button");
+
+    const shareFeedback = document.querySelector("#share-feedback");
+
+    let feedbackTimeout;
+
+    function showShareFeedback(message) {
+        clearTimeout(feedbackTimeout);
+
+        shareFeedback.textContent = message;
+
+        feedbackTimeout = setTimeout(() => {
+            shareFeedback.textContent = "";
+        }, 4000);
+    }
+
+    shareButton.addEventListener("click", async () => {
+
+        try {
+            if (navigator.share) {
+                await navigator.share({
+                    title: property.title,
+                    text: `Confira este imóvel: ${property.title}`,
+                    url: propertyUrl
+                });
+            } else if (navigator.clipboard?.writeText) {
+                await navigator.clipboard.writeText(propertyUrl);
+                showShareFeedback("Link copiado!");
+            } else {
+                showShareFeedback("Compartilhamento indisponível neste navegador.");
+            }
+        } catch (error) {
+            if (error.name !== "AbortError") {
+                console.error("Erro ao compartilhar imóvel:", error);
+                showShareFeedback("Não foi possível compartilhar o imóvel.");
+            }
+        }
+    });
 
     const demoButton = document.querySelector("#whatsapp-demo-button");
 
