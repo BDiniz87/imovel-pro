@@ -1,7 +1,11 @@
 import { properties } from "../data/properties.js";
 import { initTheme } from "../modules/theme.js";
 import { initMenu } from "../modules/menu.js";
-import { updateFavoritesCount } from "../modules/favorites.js";
+import {
+    isFavorite,
+    initFavoriteButtons,
+    updateFavoritesCount
+} from "../modules/favorites.js";
 import { formatPrice } from "../modules/formatters.js";
 import { createWhatsAppLink } from "../modules/whatsapp.js";
 
@@ -76,9 +80,21 @@ if (!property) {
              ${backText}
         </a>
 
-        <h1 class="property-details-title">
-            ${property.title}
-        </h1>
+        <div class="property-details-heading">
+            <h1 class="property-details-title">
+                ${property.title}
+            </h1>
+
+            <button
+                type="button"
+                class="favorite-button ${isFavorite(property.id) ? "favorited" : ""}"
+                data-property-id="${property.id}"
+                aria-label="Favoritar ${property.title}"
+                aria-pressed="${isFavorite(property.id)}"
+            >
+                ${isFavorite(property.id) ? "♥" : "♡"}
+            </button>
+        </div>
 
         <p class="property-details-location">
             ${property.neighborhood}, ${property.city}
@@ -195,6 +211,8 @@ if (!property) {
         </dialog>
 
     `;
+
+    initFavoriteButtons(propertyDetails);
 
     const demoButton = document.querySelector("#whatsapp-demo-button");
 

@@ -520,3 +520,23 @@
     outline: 3px solid var(--color-selected);
     outline-offset: 3px;
 }
+
+/* =========================================
+   TÍTULO E FAVORITOS
+========================================= */
+
+.property-details-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.property-details-heading .favorite-button {
+    position: static;
+    flex-shrink: 0;
+
+    width: 48px;
+    height: 48px;
+    font-size: 1.8rem;
+}

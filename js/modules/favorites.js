@@ -71,6 +71,8 @@ export function initFavoriteButtons(container, onFavoriteChange) {
         const isFavorited = toggleFavorite(propertyId);
     
         button.classList.toggle("favorited", isFavorited);
+
+        button.setAttribute("aria-pressed", String(isFavorited));
     
         button.textContent = isFavorited ? "♥" : "♡";
 
