@@ -261,6 +261,10 @@
     align-items: start;
 }
 
+.property-gallery.single-image {
+    grid-template-columns: minmax(0, 1fr);
+}
+
 /* Mantém a área da fotografia principal estável */
 .property-gallery .property-details-image {
     display: block;
@@ -367,3 +371,152 @@
     }
 }
 
+/* =========================================
+   DESCRIÇÃO DO IMÓVEL
+========================================= */
+
+.property-description {
+    width: 100%;
+    max-width: 900px;
+    margin: 40px auto 0;
+}
+
+.property-description h2 {
+    margin-bottom: 16px;
+    color: var(--color-text);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.property-description p {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    line-height: 1.8;
+    overflow-wrap: break-word;
+}
+
+.property-contact {
+    width: 100%;
+    max-width: 900px;
+    margin: 32px auto 0;
+}
+
+/* Ajustes para celulares */
+@media (max-width: 600px) {
+    .property-description {
+        margin-top: 32px;
+    }
+
+    .property-description h2 {
+        font-size: 1.25rem;
+    }
+
+    .property-description p {
+        line-height: 1.7;
+    }
+}
+
+/* =========================================
+   CONTATO VIA WHATSAPP
+========================================= */
+
+.property-whatsapp-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    padding: 14px 24px;
+    border: none;
+    border-radius: 10px;
+
+    background-color: var(--color-whatsapp);
+    color: #fff;
+
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+
+    transition: filter 0.2s ease;
+}
+
+.property-whatsapp-button img {
+    width: 24px;
+    height: 24px;
+}
+
+.property-whatsapp-button:hover {
+    filter: brightness(0.9);
+}
+
+.property-whatsapp-button:focus-visible {
+    outline: 3px solid var(--color-selected);
+    outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+    .property-whatsapp-button {
+        width: 100%;
+    }
+}
+
+/* =========================================
+   AVISO DE DEMONSTRAÇÃO
+========================================= */
+
+.whatsapp-demo-dialog {
+    width: min(90%, 420px);
+    padding: 28px;
+
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+
+    background-color: var(--color-surface);
+    color: var(--color-text);
+
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+
+    position: fixed;
+    inset: 0;
+    margin: auto;
+}
+
+.whatsapp-demo-dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.55);
+}
+
+.whatsapp-demo-dialog h2 {
+    margin-bottom: 16px;
+    font-size: 1.4rem;
+}
+
+.whatsapp-demo-dialog p {
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.whatsapp-demo-dialog button {
+    display: block;
+    margin-left: auto;
+    padding: 10px 24px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: var(--color-primary);
+    color: #fff;
+
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.whatsapp-demo-dialog button:hover {
+    filter: brightness(0.9);
+}
+
+.whatsapp-demo-dialog button:focus-visible {
+    outline: 3px solid var(--color-selected);
+    outline-offset: 3px;
+}

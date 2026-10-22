@@ -3,6 +3,7 @@ import { initTheme } from "../modules/theme.js";
 import { initMenu } from "../modules/menu.js";
 import { updateFavoritesCount } from "../modules/favorites.js";
 import { formatPrice } from "../modules/formatters.js";
+import { createWhatsAppLink } from "../modules/whatsapp.js";
 
 const urlParams = new URLSearchParams(window.location.search);
 const propertyId = urlParams.get("id");
@@ -11,6 +12,22 @@ const origin = urlParams.get("origem");
 const property = properties.find(prop => prop.id === Number(propertyId));
 
 const propertyDetails = document.querySelector("#property-details");
+
+function renderGalleryThumbnails(images) {
+    return images.map((image, index) => `
+        <button
+            type="button"
+            class="property-gallery-thumbnail"
+            aria-label="Visualizar foto ${index + 1} do imóvel"
+        >
+            <img
+                src="${image}"
+                alt=""
+                loading="lazy"
+            >
+        </button>
+    `).join("");
+}
 
 if (!property) {
     propertyDetails.innerHTML = `
@@ -43,6 +60,17 @@ if (!property) {
 
     const propertyImages = property.images ?? [property.image];
 
+    const propertyDescription = property.description ?? "Descrição não disponível para este imóvel.";
+
+    const propertyUrl = new URL(
+        `imovel.html?id=${property.id}`,
+        window.location.href
+    ).href;
+
+    const whatsappMessage = `Olá! Tenho interesse no imóvel "${property.title}", anunciado por ${formatPrice(property.price, property.purpose)}.\n\nLink: ${propertyUrl}`;
+
+    const whatsappUrl = createWhatsAppLink(whatsappMessage);
+    
     propertyDetails.innerHTML = `
         <a href="${returnUrl}" class="property-details-back">
              ${backText}
@@ -56,28 +84,22 @@ if (!property) {
             ${property.neighborhood}, ${property.city}
         </p>
 
-        <div class="property-gallery">
+        <div class="property-gallery ${propertyImages.length === 1 ? "single-image" : ""}">
             <img
                 class="property-details-image"
                 src="${propertyImages[0]}"
                 alt="${property.title}"
             >
 
-            <div class="property-gallery-thumbnails">
-                ${propertyImages.map((image, index) => `
-                    <button
-                        type="button"
-                        class="property-gallery-thumbnail"
-                        aria-label="Visualizar foto ${index + 1} do imóvel"
-                    >
-                        <img
-                            src="${image}"
-                            alt=""
-                            loading="lazy"
-                        >
-                    </button>
-                `).join("")}
-            </div>
+            ${
+                propertyImages.length > 1
+                    ? `
+                        <div class="property-gallery-thumbnails">
+                            ${renderGalleryThumbnails(propertyImages)}
+                        </div>
+                    `
+                    : ""
+            }
         </div>
 
         <p class="property-details-price">
@@ -124,8 +146,71 @@ if (!property) {
 
         </div>
 
+        <section class="property-description">
+            <h2>Sobre este imóvel</h2>
+            <p>${propertyDescription}</p>
+        </section>
+
+        <div class="property-contact">
+
+            ${
+                whatsappUrl
+                    ? `
+                        <a
+                            href="${whatsappUrl}"
+                            class="property-whatsapp-button"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <img src="assets/icons/whatsapp.svg" alt="" aria-hidden="true">
+                            Tenho interesse — WhatsApp
+                        </a>
+                    `
+                    : `
+                        <button
+                            type="button"
+                            class="property-whatsapp-button"
+                            id="whatsapp-demo-button"
+                        >
+                            <img src="assets/icons/whatsapp.svg" alt="" aria-hidden="true">
+                            Tenho interesse — WhatsApp
+                        </button>
+                    `
+            }
+
+        </div>
+
+        <dialog id="whatsapp-demo-dialog" class="whatsapp-demo-dialog" aria-labelledby="whatsapp-demo-title">
+            <h2 id="whatsapp-demo-title">Versão demonstrativa</h2>
+
+            <p>
+                Este é um site de demonstração do ImóvelPro.
+                O contato por WhatsApp estará disponível quando
+                o site for configurado para um corretor ou imobiliária.
+            </p>
+
+            <button type="button" id="close-whatsapp-dialog">
+                Entendi
+            </button>
+        </dialog>
+
     `;
 
+    const demoButton = document.querySelector("#whatsapp-demo-button");
+
+    const demoDialog = document.querySelector("#whatsapp-demo-dialog");
+
+    const closeDialogButton = document.querySelector("#close-whatsapp-dialog");
+
+    if (demoButton) {
+        demoButton.addEventListener("click", () => {
+            demoDialog.showModal();
+        });
+        closeDialogButton.addEventListener("click", () => {
+            demoDialog.close();
+        });
+    }
+    
     const mainImage = document.querySelector(".property-details-image");
 
     const thumbnails = document.querySelectorAll(".property-gallery-thumbnail");
