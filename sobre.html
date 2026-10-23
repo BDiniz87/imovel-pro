@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre | ImóvelPro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pages/about.css">
+    <link rel="stylesheet" href="css/components/whatsappDialog.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                Imóvel <span>Pro</span>
+            </a>
+
+            <button
+                class="menu-toggle"
+                id="menu-toggle"
+                aria-label="Abrir menu"
+                aria-expanded="false"
+            >
+                ☰
+            </button>
+
+            <nav class="nav" id="nav">
+                <a href="index.html" class="nav-link">Início</a>
+                <a href="imoveis.html?finalidade=venda" class="nav-link">Comprar</a>
+                <a href="imoveis.html?finalidade=aluguel" class="nav-link">Alugar</a>
+                <a href="sobre.html" class="nav-link active">Sobre</a>
+                <a href="#" class="nav-link">Contato</a>
+                <a
+                    href="favoritos.html"
+                    class="favorites-link"
+                    aria-label="Ver favoritos"
+                    title="Ver favoritos"
+                >
+                    <span class="favorites-icon" aria-hidden="true">♡</span>
+                    <span class="favorites-text">Favoritos</span>
+                    <span class="favorites-count" id="favorites-count" aria-hidden="true">0</span>
+                </a>
+
+                <button
+                    class="theme-toggle"
+                    id="theme-toggle"
+                    aria-label="Alternar tema"
+                >
+                    🌙
+                </button>
+
+            </nav>
+
+        </div>
+
+    </header>   
+
+    <main>
+
+        <section class="about-hero">
+            <div class="container about-hero-content">
+
+                <div class="about-hero-text">
+                    <span class="about-eyebrow">Prazer em receber você!</span>
+
+                    <h1>Seu próximo imóvel começa com uma boa conversa.</h1>
+
+                    <p>
+                        Comprar ou alugar um imóvel é uma decisão importante.
+                        Meu compromisso é tornar essa jornada mais simples,
+                        tranquila e transparente, oferecendo um atendimento
+                        próximo e dedicado às suas necessidades.
+                    </p>
+
+                    <p>
+                        Estou aqui para ajudar você a encontrar um lugar
+                        que combine com seus planos e seu estilo de vida.
+                    </p>
+
+                    <div class="about-broker-info">
+                        <h2 id="broker-name"></h2>
+                        <p id="broker-creci"></p>
+                        <p id="broker-region"></p>
+                    </div>
+                    
+                </div>
+
+                <div class="about-hero-image">
+                    <img
+                        src="assets/images/about-broker.jpg"
+                        alt="Imagem ilustrativa de uma profissional em um escritório imobiliário"
+                        width="1662"
+                        height="928"
+                    >
+                    <span class="about-image-caption">
+                        Imagem ilustrativa
+                    </span>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="about-benefits">
+            <div class="container">
+
+                <div class="about-section-heading">
+                    <h2>Por que contar comigo?</h2>
+                    <p>
+                        Cada pessoa tem necessidades diferentes.
+                        Meu objetivo é oferecer um atendimento que respeite
+                        suas prioridades e facilite suas decisões.
+                    </p>
+                </div>
+
+                <div class="about-benefits-grid">
+
+                    <article class="about-benefit-card">
+                        <span
+                            class="about-benefit-icon icon-handshake"
+                            aria-hidden="true"
+                        ></span>
+                        <h3>Atendimento personalizado</h3>
+                        <p>
+                            Uma conversa próxima para entender o que você
+                            procura e apresentar opções adequadas.
+                        </p>
+                    </article>
+
+                    <article class="about-benefit-card">
+                        <span
+                            class="about-benefit-icon icon-shield"
+                            aria-hidden="true"
+                        ></span>
+                        <h3>Transparência</h3>
+                        <p>
+                            Informações claras e comunicação aberta
+                            durante todas as etapas da negociação.
+                        </p>
+                    </article>
+
+                    <article class="about-benefit-card">
+                        <span
+                            class="about-benefit-icon icon-messages"
+                            aria-hidden="true"
+                        ></span>
+                        <h3>Acompanhamento</h3>
+                        <p>
+                            Orientação e atenção aos detalhes para ajudar
+                            você a tomar decisões com tranquilidade.
+                        </p>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section class="about-contact">
+            <div class="container about-contact-content">
+
+                <h2>Vamos conversar sobre seu próximo imóvel?</h2>
+
+                <p>
+                    Estou à disposição para entender o que você procura
+                    e ajudar a encontrar as melhores opções para você.
+                </p>
+
+                <div id="about-whatsapp-contact"></div>
+
+            </div>
+        </section>
+
+        <dialog
+            id="whatsapp-demo-dialog"
+            class="whatsapp-demo-dialog"
+            aria-labelledby="whatsapp-demo-title"
+        >
+            <h2 id="whatsapp-demo-title">Versão demonstrativa</h2>
+
+            <p>
+                Este é um site de demonstração do ImóvelPro.
+                O contato por WhatsApp estará disponível quando
+                o site for configurado para um corretor ou imobiliária.
+            </p>
+
+            <button type="button" id="close-whatsapp-dialog">
+                Entendi
+            </button>
+        </dialog>
+
+    </main>
+
+
+    <script type="module" src="js/pages/about.js"></script>
+</body>
+</html>

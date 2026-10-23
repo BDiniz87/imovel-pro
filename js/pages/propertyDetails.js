@@ -8,6 +8,7 @@ import {
 } from "../modules/favorites.js";
 import { formatPrice } from "../modules/formatters.js";
 import { createWhatsAppLink } from "../modules/whatsapp.js";
+import { initWhatsAppDemo } from "../modules/whatsappDemo.js";
 
 const urlParams = new URLSearchParams(window.location.search);
 const propertyId = urlParams.get("id");
@@ -276,20 +277,7 @@ if (!property) {
         }
     });
 
-    const demoButton = document.querySelector("#whatsapp-demo-button");
-
-    const demoDialog = document.querySelector("#whatsapp-demo-dialog");
-
-    const closeDialogButton = document.querySelector("#close-whatsapp-dialog");
-
-    if (demoButton) {
-        demoButton.addEventListener("click", () => {
-            demoDialog.showModal();
-        });
-        closeDialogButton.addEventListener("click", () => {
-            demoDialog.close();
-        });
-    }
+    initWhatsAppDemo();
     
     const mainImage = document.querySelector(".property-details-image");
 
