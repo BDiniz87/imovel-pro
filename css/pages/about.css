@@ -236,39 +236,6 @@
     line-height: 1.7;
 }
 
-.about-whatsapp-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-
-    padding: 14px 24px;
-    border: none;
-    border-radius: 10px;
-
-    background-color: #25d366;
-    color: #ffffff;
-
-    font-size: 1rem;
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.about-whatsapp-button img {
-    width: 24px;
-    height: 24px;
-}
-
-.about-whatsapp-button:hover {
-    background-color: #1ebe5d;
-}
-
-.about-whatsapp-button:focus-visible {
-    outline: 3px solid var(--color-selected);
-    outline-offset: 3px;
-}
-
 @media (max-width: 768px) {
     .about-contact {
         padding: 56px 0;
@@ -301,4 +268,28 @@
     color: var(--color-text-secondary);
     font-size: 0.9rem;
     line-height: 1.5;
+}
+
+.about-broker-region {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.about-region-icon {
+    display: block;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+
+    background-color: var(--color-text-secondary);
+
+    mask-image: url("../../assets/icons/map-pin.svg");
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+}
+
+.about-broker-region p {
+    margin-bottom: 0;
 }

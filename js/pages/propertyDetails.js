@@ -196,7 +196,7 @@ if (!property) {
                     ? `
                         <a
                             href="${whatsappUrl}"
-                            class="property-whatsapp-button"
+                            class="whatsapp-button property-whatsapp-button"
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="Tenho interesse neste imóvel. Entrar em contato pelo WhatsApp"
@@ -208,7 +208,7 @@ if (!property) {
                     : `
                         <button
                             type="button"
-                            class="property-whatsapp-button"
+                            class="whatsapp-button property-whatsapp-button"
                             id="whatsapp-demo-button"
                             aria-label="Tenho interesse neste imóvel. Ver informações sobre o contato na versão demonstrativa"
                         >

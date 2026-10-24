@@ -1,0 +1,39 @@
+/* =========================================
+   BOTÃO DE CONTATO VIA WHATSAPP
+========================================= */
+
+.whatsapp-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    padding: 14px 24px;
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: var(--color-whatsapp);
+    color: #fff;
+
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+
+    transition: filter 0.2s ease;
+}
+
+.whatsapp-button img {
+    width: 24px;
+    height: 24px;
+}
+
+.whatsapp-button:hover {
+    filter: brightness(0.9);
+}
+
+.whatsapp-button:focus-visible {
+    outline: 3px solid var(--color-selected);
+    outline-offset: 3px;
+}

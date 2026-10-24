@@ -21,7 +21,7 @@ if (whatsappUrl) {
     contactContainer.innerHTML = `
         <a
             href="${whatsappUrl}"
-            class="about-whatsapp-button"
+            class="whatsapp-button"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Conversar pelo WhatsApp"
@@ -38,7 +38,7 @@ if (whatsappUrl) {
     contactContainer.innerHTML = `
         <button
             type="button"
-            class="about-whatsapp-button"
+            class="whatsapp-button"
             id="whatsapp-demo-button"
         >
             <img

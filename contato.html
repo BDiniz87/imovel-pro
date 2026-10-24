@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato | ImóvelPro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components/whatsappDialog.css">
+    <link rel="stylesheet" href="css/components/whatsappButton.css">
+    <link rel="stylesheet" href="css/pages/contact.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                Imóvel <span>Pro</span>
+            </a>
+
+            <button
+                class="menu-toggle"
+                id="menu-toggle"
+                aria-label="Abrir menu"
+                aria-expanded="false"
+            >
+                ☰
+            </button>
+
+            <nav class="nav" id="nav">
+                <a href="index.html" class="nav-link">Início</a>
+                <a href="imoveis.html?finalidade=venda" class="nav-link">Comprar</a>
+                <a href="imoveis.html?finalidade=aluguel" class="nav-link">Alugar</a>
+                <a href="sobre.html" class="nav-link">Sobre</a>
+                <a href="contato.html" class="nav-link active">Contato</a>
+                <a
+                    href="favoritos.html"
+                    class="favorites-link"
+                    aria-label="Ver favoritos"
+                    title="Ver favoritos"
+                >
+                    <span class="favorites-icon" aria-hidden="true">♡</span>
+                    <span class="favorites-text">Favoritos</span>
+                    <span class="favorites-count" id="favorites-count" aria-hidden="true">0</span>
+                </a>
+
+                <button
+                    class="theme-toggle"
+                    id="theme-toggle"
+                    aria-label="Alternar tema"
+                >
+                    🌙
+                </button>
+
+            </nav>
+
+        </div>
+
+    </header>   
+
+    <main>
+
+       <section class="contact-hero">
+            <div class="container contact-hero-content">
+                <h1>Vamos conversar?</h1>
+                <p>
+                    Conte um pouco sobre o imóvel que você procura.
+                    Estou à disposição para ajudar.
+                </p>
+            </div>
+        </section>
+
+       <section class="contact-info">
+            <div class="container">
+
+                <h2>Entre em contato</h2>
+
+                <div class="contact-info-content">
+
+                    <div class="contact-broker-info">
+
+                        <span class="contact-broker-icon" aria-hidden="true"></span>
+
+                        <h3 id="broker-name"></h3>
+
+                        <p id="broker-creci"></p>
+
+                        <div class="contact-region">
+                            <span class="contact-region-icon" aria-hidden="true"></span>
+                            <p id="broker-region"></p>
+                        </div>
+
+                    </div>
+
+                    <div class="contact-whatsapp-card">
+                        <span class="contact-whatsapp-icon" aria-hidden="true"></span>
+
+                        <h3>Atendimento pelo WhatsApp</h3>
+
+                        <p>
+                            Tire suas dúvidas e conheça os imóveis disponíveis.
+                        </p>
+
+                        <div id="contact-whatsapp"></div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <dialog
+            id="whatsapp-demo-dialog"
+            class="whatsapp-demo-dialog"
+            aria-labelledby="whatsapp-demo-title"
+        >
+            <h2 id="whatsapp-demo-title">Versão demonstrativa</h2>
+
+            <p>
+                Este é um site de demonstração do ImóvelPro.
+                O contato por WhatsApp estará disponível quando
+                o site for configurado para um corretor ou imobiliária.
+            </p>
+
+            <button type="button" id="close-whatsapp-dialog">
+                Entendi
+            </button>
+        </dialog>
+ 
+    <script type="module" src="js/pages/contact.js"></script>
+</body>
+</html>
