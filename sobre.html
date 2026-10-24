@@ -6,7 +6,7 @@
     <title>Sobre | ImóvelPro</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pages/about.css">
-    <link rel="stylesheet" href="css/components/whatsappDialog.css">
+    <link rel="stylesheet" href="css/components/demoDialog.css">
     <link rel="stylesheet" href="css/components/whatsappButton.css">
 </head>
 <body>
@@ -176,26 +176,22 @@
             </div>
         </section>
 
-        <dialog
-            id="whatsapp-demo-dialog"
-            class="whatsapp-demo-dialog"
-            aria-labelledby="whatsapp-demo-title"
-        >
-            <h2 id="whatsapp-demo-title">Versão demonstrativa</h2>
-
-            <p>
-                Este é um site de demonstração do ImóvelPro.
-                O contato por WhatsApp estará disponível quando
-                o site for configurado para um corretor ou imobiliária.
-            </p>
-
-            <button type="button" id="close-whatsapp-dialog">
-                Entendi
-            </button>
-        </dialog>
-
     </main>
 
+    <dialog
+        id="demo-dialog"
+        class="demo-dialog"
+        aria-labelledby="demo-dialog-title"
+        aria-describedby="demo-dialog-message"
+    >
+        <h2 id="demo-dialog-title">Versão demonstrativa</h2>
+
+        <p id="demo-dialog-message"></p>
+
+        <button type="button" id="close-demo-dialog">
+            Entendi
+        </button>
+    </dialog>
 
     <script type="module" src="js/pages/about.js"></script>
 </body>

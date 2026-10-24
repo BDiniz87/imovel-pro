@@ -2,7 +2,7 @@ import { initTheme } from "../modules/theme.js";
 import { initMenu } from "../modules/menu.js";
 import { updateFavoritesCount } from "../modules/favorites.js";
 import { createWhatsAppLink } from "../modules/whatsapp.js";
-import { initWhatsAppDemo } from "../modules/whatsappDemo.js";
+import { initDemoDialog, showDemoDialog } from "../modules/demoDialog.js";
 import { siteConfig } from "../config.js";
 
 const contactContainer = document.querySelector("#about-whatsapp-contact");
@@ -49,7 +49,13 @@ if (whatsappUrl) {
             Conversar pelo WhatsApp
         </button>
     `;
-    initWhatsAppDemo();
+        const demoButton = document.querySelector("#whatsapp-demo-button");
+
+        demoButton.addEventListener("click", () => {
+            showDemoDialog("WhatsApp");
+        });
+
+        initDemoDialog();
 }
 
 initTheme();

@@ -2,7 +2,7 @@
    AVISO DE DEMONSTRAÇÃO
 ========================================= */
 
-.whatsapp-demo-dialog {
+.demo-dialog {
     width: min(90%, 420px);
     padding: 28px;
 
@@ -19,21 +19,21 @@
     margin: auto;
 }
 
-.whatsapp-demo-dialog::backdrop {
+.demo-dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.55);
 }
 
-.whatsapp-demo-dialog h2 {
+.demo-dialog h2 {
     margin-bottom: 16px;
     font-size: 1.4rem;
 }
 
-.whatsapp-demo-dialog p {
+.demo-dialog p {
     margin-bottom: 24px;
     line-height: 1.6;
 }
 
-.whatsapp-demo-dialog button {
+.demo-dialog button {
     display: block;
     margin-left: auto;
     padding: 10px 24px;
@@ -49,11 +49,11 @@
     cursor: pointer;
 }
 
-.whatsapp-demo-dialog button:hover {
+.demo-dialog button:hover {
     filter: brightness(0.9);
 }
 
-.whatsapp-demo-dialog button:focus-visible {
+.demo-dialog button:focus-visible {
     outline: 3px solid var(--color-selected);
     outline-offset: 3px;
 }

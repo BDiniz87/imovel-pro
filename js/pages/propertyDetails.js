@@ -8,7 +8,7 @@ import {
 } from "../modules/favorites.js";
 import { formatPrice } from "../modules/formatters.js";
 import { createWhatsAppLink } from "../modules/whatsapp.js";
-import { initWhatsAppDemo } from "../modules/whatsappDemo.js";
+import { initDemoDialog, showDemoDialog } from "../modules/demoDialog.js";
 
 const urlParams = new URLSearchParams(window.location.search);
 const propertyId = urlParams.get("id");
@@ -220,16 +220,17 @@ if (!property) {
 
         </div>
 
-        <dialog id="whatsapp-demo-dialog" class="whatsapp-demo-dialog" aria-labelledby="whatsapp-demo-title">
-            <h2 id="whatsapp-demo-title">Versão demonstrativa</h2>
+        <dialog
+            id="demo-dialog"
+            class="demo-dialog"
+            aria-labelledby="demo-dialog-title"
+            aria-describedby="demo-dialog-message"
+        >
+            <h2 id="demo-dialog-title">Versão demonstrativa</h2>
 
-            <p>
-                Este é um site de demonstração do ImóvelPro.
-                O contato por WhatsApp estará disponível quando
-                o site for configurado para um corretor ou imobiliária.
-            </p>
+            <p id="demo-dialog-message"></p>
 
-            <button type="button" id="close-whatsapp-dialog">
+            <button type="button" id="close-demo-dialog">
                 Entendi
             </button>
         </dialog>
@@ -277,7 +278,15 @@ if (!property) {
         }
     });
 
-    initWhatsAppDemo();
+    initDemoDialog();
+
+    const demoButton = document.querySelector("#whatsapp-demo-button");
+
+    if (demoButton) {
+        demoButton.addEventListener("click", () => {
+            showDemoDialog("WhatsApp");
+        });
+    }
     
     const mainImage = document.querySelector(".property-details-image");
 

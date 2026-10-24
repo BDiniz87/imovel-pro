@@ -3,7 +3,7 @@ import { initMenu } from "../modules/menu.js";
 import { updateFavoritesCount } from "../modules/favorites.js";
 import {siteConfig} from "../config.js";
 import { createWhatsAppLink } from "../modules/whatsapp.js";
-import { initWhatsAppDemo } from "../modules/whatsappDemo.js";
+import { initDemoDialog, showDemoDialog } from "../modules/demoDialog.js";
 
 const broker = siteConfig.broker;
 
@@ -49,9 +49,14 @@ if (whatsappUrl) {
             Conversar pelo WhatsApp
         </button>
     `;
-    initWhatsAppDemo();
+    document
+        .querySelector("#whatsapp-demo-button")
+        .addEventListener("click", () => {
+            showDemoDialog("WhatsApp");
+        });
 }
 
+initDemoDialog();
 initTheme();
 initMenu();
 updateFavoritesCount();
