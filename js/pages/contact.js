@@ -4,6 +4,7 @@ import { updateFavoritesCount } from "../modules/favorites.js";
 import {siteConfig} from "../config.js";
 import { createWhatsAppLink } from "../modules/whatsapp.js";
 import { initDemoDialog, showDemoDialog } from "../modules/demoDialog.js";
+import { initFooter } from "../modules/footer.js";
 
 const broker = siteConfig.broker;
 
@@ -60,3 +61,4 @@ initDemoDialog();
 initTheme();
 initMenu();
 updateFavoritesCount();
+initFooter();

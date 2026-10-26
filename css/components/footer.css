@@ -1,0 +1,222 @@
+/* =========================================
+   FOOTER
+========================================= */
+
+.site-footer {
+    padding-top: 56px;
+
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text);
+}
+
+/* Estrutura principal */
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.4fr;
+    gap: 48px;
+
+    padding-bottom: 48px;
+}
+
+/* Identidade */
+
+.footer-brand h2 {
+    margin-bottom: 12px;
+    font-size: 1.4rem;
+}
+
+.footer-brand > p {
+    max-width: 320px;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+}
+
+.footer-brand-highlight {
+    color: #2563eb;
+}
+
+.footer-broker {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    margin-top: 24px;
+}
+
+.footer-broker strong {
+    font-size: 0.95rem;
+}
+
+.footer-broker p {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+
+/* Navegação e contato */
+
+.footer-navigation,
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.footer-navigation h3,
+.footer-contact h3 {
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.footer-navigation a,
+.footer-social-links a,
+.footer-social-links button {
+    color: var(--color-text-secondary);
+    font: inherit;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.footer-navigation a:hover,
+.footer-social-links a:hover,
+.footer-social-links button:hover {
+    color: var(--color-primary);
+}
+
+/* Contato e redes */
+
+.footer-social-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.footer-social-links button {
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+/* Rodapé inferior */
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+    padding-top: 24px;
+    padding-bottom: 24px;
+
+    border-top: 1px solid var(--color-border);
+}
+
+.footer-bottom p,
+.footer-bottom a {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+}
+
+.footer-bottom a {
+    text-decoration: none;
+}
+
+.footer-bottom a:hover {
+    color: var(--color-primary);
+}
+
+/* Acessibilidade */
+
+.site-footer a:focus-visible,
+.site-footer button:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
+    border-radius: 3px;
+}
+
+/* Ícones e links de contato */
+
+.footer-contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 28px;
+}
+
+.footer-contact-link img,
+.footer-region img,
+.footer-bottom a img {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+/* Ícones monocromáticos do footer */
+
+.footer-contact-link img,
+.footer-region img,
+.footer-bottom a img {
+    filter: brightness(0);
+}
+
+[data-theme="dark"] .footer-contact-link img,
+[data-theme="dark"] .footer-region img,
+[data-theme="dark"] .footer-bottom a img {
+    filter: brightness(0) invert(1);
+}
+
+/* Região de atuação */
+
+.footer-region {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Assinatura do desenvolvedor */
+
+.footer-bottom a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 768px) {
+    .site-footer {
+        padding-top: 40px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .footer-brand {
+        grid-column: auto;
+    }
+}

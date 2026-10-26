@@ -7,6 +7,7 @@ import {
 } from "../modules/favorites.js";
 import { properties } from "../data/properties.js";
 import { createPropertyCard } from "../modules/propertyCard.js";
+import { initFooter } from "../modules/footer.js";
 
 const favoritesGrid = document.getElementById("favorites-grid");
 
@@ -48,3 +49,4 @@ initMenu();
 initFavoriteButtons(favoritesGrid, renderFavorites);
 updateFavoritesCount();
 renderFavorites();
+initFooter();

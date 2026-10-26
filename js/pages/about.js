@@ -4,6 +4,7 @@ import { updateFavoritesCount } from "../modules/favorites.js";
 import { createWhatsAppLink } from "../modules/whatsapp.js";
 import { initDemoDialog, showDemoDialog } from "../modules/demoDialog.js";
 import { siteConfig } from "../config.js";
+import { initFooter } from "../modules/footer.js";
 
 const contactContainer = document.querySelector("#about-whatsapp-contact");
 
@@ -61,3 +62,4 @@ if (whatsappUrl) {
 initTheme();
 initMenu();
 updateFavoritesCount();
+initFooter();

@@ -19,6 +19,7 @@ import {
      getTotalPages,
      renderPagination as renderPaginationButtons
 } from "../modules/pagination.js";
+import { initFooter } from "../modules/footer.js";
 
 const priceInput = document.getElementById("price");
 const priceValue = document.getElementById("price-value");
@@ -328,3 +329,4 @@ renderCurrentPage();
 renderPagination();
 initFavoriteButtons(propertiesContainer);
 updateFavoritesCount();
+initFooter();

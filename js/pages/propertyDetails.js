@@ -9,6 +9,7 @@ import {
 import { formatPrice } from "../modules/formatters.js";
 import { createWhatsAppLink } from "../modules/whatsapp.js";
 import { initDemoDialog, showDemoDialog } from "../modules/demoDialog.js";
+import { initFooter } from "../modules/footer.js";
 
 const urlParams = new URLSearchParams(window.location.search);
 const propertyId = urlParams.get("id");
@@ -318,3 +319,4 @@ if (!property) {
 initTheme();
 initMenu();
 updateFavoritesCount();
+initFooter();

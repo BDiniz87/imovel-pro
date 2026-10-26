@@ -19,6 +19,7 @@ import {
     sortProperties
  } from "../modules/filters.js";
  import { formatPrice } from "../modules/formatters.js";
+ import { initFooter } from "../modules/footer.js";
 
 const listingsGrid = document.querySelector("#listings-grid");
 const paginationContainer = document.querySelector("#pagination");
@@ -253,3 +254,4 @@ renderListings();
 updatePagination();
 initFavoriteButtons(listingsGrid);
 updateFavoritesCount();
+initFooter();
