@@ -142,8 +142,20 @@ button {
 }
 
 .favorites-icon {
-    font-size: 26px;
-    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.favorites-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    transition: fill var(--transition);
+}
+
+.favorites-icon.favorited svg {
+    fill: currentColor;
 }
 
 .favorites-text {
@@ -414,6 +426,17 @@ button {
 
 .favorite-button:hover {
     transform: scale(1.08);
+}
+
+.favorite-button svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    transition: fill var(--transition), stroke var(--transition);
+}
+
+.favorite-button.favorited svg {
+    fill: currentColor;
 }
 
 .property-content {

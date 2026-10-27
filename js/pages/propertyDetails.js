@@ -93,13 +93,23 @@ if (!property) {
                     type="button"
                     class="favorite-button ${isFavorite(property.id) ? "favorited" : ""}"
                     data-property-id="${property.id}"
-                    aria-label="Favoritar ${property.title}"
+                    aria-label="${isFavorite(property.id) ? "Remover dos favoritos" : "Adicionar aos favoritos"}"
                     aria-pressed="${isFavorite(property.id)}"
                 >
-                    ${isFavorite(property.id) ? "♥" : "♡"}
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z"/>
+                    </svg>
                 </button>
 
-                 <button
+                <button
                     type="button"
                     class="property-share-button"
                     aria-label="Compartilhar imóvel"

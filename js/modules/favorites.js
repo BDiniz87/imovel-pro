@@ -50,8 +50,6 @@ export function updateFavoritesCount() {
 
     const hasFavorites = favoritesCount > 0;
 
-    favoritesIcon.textContent = hasFavorites ? "♥" : "♡";
-
     favoritesIcon.classList.toggle("favorited", hasFavorites);
 
 }
@@ -74,7 +72,10 @@ export function initFavoriteButtons(container, onFavoriteChange) {
 
         button.setAttribute("aria-pressed", String(isFavorited));
     
-        button.textContent = isFavorited ? "♥" : "♡";
+        button.setAttribute(
+            "aria-label",
+            isFavorited ? "Remover dos favoritos" : "Adicionar aos favoritos"
+        );
 
         updateFavoritesCount();
 
