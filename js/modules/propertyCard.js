@@ -13,10 +13,16 @@ export function createPropertyCard(property, origin) {
 
         <div class="property-image">
 
-            <img
-                src="${property.image}"
-                alt="${property.title}"
+            <a
+                href="imovel.html?id=${property.id}&origem=${origin}"
+                class="property-image-link"
+                aria-label="Ver detalhes de ${property.title}"
             >
+                <img
+                    src="${property.image}"
+                    alt=""
+                >
+            </a>
 
             <span class="property-purpose">
                 ${property.purpose === "venda" ? "Venda" : "Aluguel"}
