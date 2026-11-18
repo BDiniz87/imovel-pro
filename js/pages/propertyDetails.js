@@ -64,6 +64,19 @@ if (!property) {
 
     const backText = returnText[origin] || "Voltar para os imóveis";
 
+    const previousPage = document.referrer
+        ? new URL(document.referrer)
+        : null;
+
+    const cameFromOurSite = previousPage
+        && previousPage.origin === window.location.origin
+        && (
+            previousPage.pathname.endsWith("/index.html")
+            || previousPage.pathname.endsWith("/imoveis.html")
+            || previousPage.pathname.endsWith("/favoritos.html")
+            || previousPage.pathname.endsWith("/")
+        );
+
     const propertyImages = property.images ?? [property.image];
 
     const propertyDescription = property.description ?? "Descrição não disponível para este imóvel.";
@@ -247,6 +260,15 @@ if (!property) {
         </dialog>
 
     `;
+
+    const backLink = propertyDetails.querySelector(".property-details-back");
+
+    backLink.addEventListener("click", (event) => {
+        if (!cameFromOurSite) return;
+
+        event.preventDefault();
+        window.history.back();
+    });
 
     initFavoriteButtons(propertyDetails);
 
