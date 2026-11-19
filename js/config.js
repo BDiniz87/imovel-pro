@@ -14,7 +14,7 @@ export const siteConfig = {
 
     developer: {
         name: "Bruno Diniz",
-        url: "https://github.com/BDiniz87"
+        url: "https://bdiniz87.github.io/"
     },
 
     broker: {

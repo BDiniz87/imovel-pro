@@ -88,6 +88,8 @@ function updateNeighborhoods(selectedCity) {
 
     });
 
+    neighborhoodSelect.value = "";
+
 }
 
 citySelect.addEventListener("change", () => {
@@ -103,10 +105,11 @@ purposeButtons.forEach((button) => {
     button.addEventListener("click", () => {
 
         purposeButtons.forEach((item) => {
-            item.classList.remove("active");
-        });
+            const isSelected = item === button;
 
-        button.classList.add("active");
+            item.classList.toggle("active", isSelected);
+            item.setAttribute("aria-pressed", String(isSelected));
+        });
 
         selectedPurpose = button.dataset.purpose;
 
@@ -195,17 +198,18 @@ clearFiltersButton.addEventListener("click", () => {
 
     purposeButtons.forEach((button) => {
         button.classList.remove("active");
+        button.setAttribute("aria-pressed", "false");
     });
 
     const buyButton = document.querySelector('.purpose-button[data-purpose="venda"]');
 
     buyButton.classList.add("active");
+    buyButton.setAttribute("aria-pressed", "true");
 
     document.getElementById("property-type").value = "";
     citySelect.value = "";
 
     updateNeighborhoods("");
-    neighborhoodSelect.value = "";
 
     updatePriceRange();
 
@@ -260,6 +264,11 @@ function handlePageChange(page) {
     currentPage = page;
     renderCurrentPage();
     renderPagination();
+    
+    propertiesContainer.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 }
 
 function renderPagination() {
